@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index notation{% endblock %}
+
+{% block body %}
+    <h1>Index de notation</h1>
+
+    <a class="btn btn-primary mb-2" href="{{ path('review_new') }}">Ajouter une notation</a><br>
+
+    <table class="table table-striped table-bordered" id="review-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Pseudo</th>
+                <th>Note</th>
+                <th>Comment</th>
+                <th>Date d'ajout</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.email }}</td>
+                <td>{{ review.pseudo }}</td>
+                <td>{{ review.note }}</td>
+                <td>{{ review.getExcerptComment }}</td>
+                <td>{{ review.dateCreate ? review.dateCreate|date('d/m/Y') : '' }}</td>
+                <td>
+                    {% if review.image is not empty %} {# si img présente affiche là dans tableau#}
+                        <img src="{{ asset(review.image.webPath) }}" style="max-height: 70px"/>
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('review_show', {'id': review.id}) }}">Voir plus</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas de note</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

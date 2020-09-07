@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une note{% endblock %}
+
+{% block body %}
+    <h1>Création de votre note</h1>
+
+    {{ include('review/_form.html.twig') }}
+
+    <a href="{{ path('review_index') }}">Retour à la liste de notation</a>
+{% endblock %}

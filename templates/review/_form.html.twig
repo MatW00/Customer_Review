@@ -1,0 +1,21 @@
+{{ form_start(form) }} {# affiche la balise d'ouverture du form #}
+
+        {{ form_errors(form) }} {# Affiche les eventuelles erreurs #}
+        {{ form_row(form.email) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.note, {label_attr: {class: 'radio-custom'}}) }}
+        {{ form_row(form.comment) }}
+        <div class="media mb-3">
+            {% if review is defined and review.image is not empty %}
+            {# asset permet de pointer sur le dossier 'public', twig appelle la méthode 'getWebPath' de l'image #}
+            <img src="{{ asset(review.image.webPath) }}" class="align-left-center mr-3" style="max-width:180px"/>
+            {% endif %}
+            <div class="media-body">
+                {{ form_row(form.image) }}
+                {{ form_row(form.deleteImage, {label_attr: {class: 'checkbox-custom'}}) }}
+            </div>
+        </div>
+
+        {{ form_row(form.save) }} {# affiche le submit #}
+
+{{ form_end(form) }} {# affiche la balise de fermeture du form #}

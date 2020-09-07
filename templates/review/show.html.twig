@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <h1>Avis de {{ review.pseudo }}</h1>
+
+    <div class="card">
+        {% if review.image is not empty %} {# si img présente affiche là dans tableau#}
+            <img src="{{ asset(review.image.webPath) }}" class="card-img-top" alt=""/>
+        {% endif %}
+            <div class="card-body">
+                <h4 class="card-title mb-2">Avis de {{ review.email }}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{ review.dateCreate ? review.dateCreate|date('d/m/Y') : '' }}</h6>
+                <a href="#" class="btn btn-primary mb-2">{{ review.note }} / 5</a>
+                <p class="card-text"><strong class="mb-4">Commentaire</strong> <br>{{ review.comment }}</p>
+            </div>
+    </div>
+
+    <a href="{{ path('review_index') }}">Retour au listing</a>
+{% endblock %}
